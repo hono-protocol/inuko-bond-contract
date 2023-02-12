@@ -1,0 +1,73 @@
+type ApprovalForAll @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  operator: Bytes! # address
+  approved: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AuthorityUpdated @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes! # address
+  newAuthority: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Bonded @entity(immutable: true) {
+  id: Bytes!
+  marketId: BigInt! # uint256
+  referrer: Bytes! # address
+  amount: BigInt! # uint256
+  payout: BigInt! # uint256
+  timestamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ERC1155BondTokenCreated @entity(immutable: true) {
+  id: Bytes!
+  tokenId: BigInt! # uint256
+  underlying: Bytes! # address
+  expiry: BigInt! # uint48
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnerUpdated @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TransferBatch @entity(immutable: true) {
+  id: Bytes!
+  operator: Bytes! # address
+  from: Bytes! # address
+  to: Bytes! # address
+  ids: [BigInt!] # uint256[]
+  amounts: [BigInt!] # uint256[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TransferSingle @entity(immutable: true) {
+  id: Bytes!
+  operator: Bytes! # address
+  from: Bytes! # address
+  to: Bytes! # address
+  tokenId: BigInt! # uint256
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

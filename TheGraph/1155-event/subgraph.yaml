@@ -1,0 +1,42 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Contract
+    network: chapel
+    source:
+      address: "0xeaf9cefaa448236161bb8a4d32404840bdd501eb"
+      abi: Contract
+      startBlock: 27033255
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ApprovalForAll
+        - AuthorityUpdated
+        - Bonded
+        - ERC1155BondTokenCreated
+        - OwnerUpdated
+        - TransferBatch
+        - TransferSingle
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: AuthorityUpdated(indexed address,indexed address)
+          handler: handleAuthorityUpdated
+        - event: Bonded(indexed uint256,indexed address,uint256,uint256,uint256)
+          handler: handleBonded
+        - event: ERC1155BondTokenCreated(uint256,indexed address,indexed uint48)
+          handler: handleERC1155BondTokenCreated
+        - event: OwnerUpdated(indexed address,indexed address)
+          handler: handleOwnerUpdated
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+      file: ./src/contract.ts
