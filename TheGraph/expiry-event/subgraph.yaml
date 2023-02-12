@@ -1,0 +1,33 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ExpiryTeller
+    network: chapel
+    source:
+      address: "0x7EEf2d5385525BdcD7E261fAb1507B39Aa2F8F4A"
+      abi: ExpiryTeller
+      startBlock: 27033154
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AuthorityUpdated
+        - Bonded
+        - ERC20BondTokenCreated
+        - OwnerUpdated
+      abis:
+        - name: ExpiryTeller
+          file: ./abis/ExpiryTeller.json
+      eventHandlers:
+        - event: AuthorityUpdated(indexed address,indexed address)
+          handler: handleAuthorityUpdated
+        - event: Bonded(indexed uint256,indexed address,uint256,uint256,uint256)
+          handler: handleBonded
+        - event: ERC20BondTokenCreated(address,indexed address,indexed uint48)
+          handler: handleERC20BondTokenCreated
+        - event: OwnerUpdated(indexed address,indexed address)
+          handler: handleOwnerUpdated
+      file: ./src/expiry-teller.ts

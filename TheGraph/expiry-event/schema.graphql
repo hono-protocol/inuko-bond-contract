@@ -1,0 +1,39 @@
+type AuthorityUpdated @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes! # address
+  newAuthority: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Bonded @entity(immutable: true) {
+  id: Bytes!
+  marketId: BigInt! # uint256
+  referrer: Bytes! # address
+  amount: BigInt! # uint256
+  payout: BigInt! # uint256
+  timeStamp: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ERC20BondTokenCreated @entity(immutable: true) {
+  id: Bytes!
+  bondToken: Bytes! # address
+  underlying: Bytes! # address
+  expiry: BigInt! # uint48
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnerUpdated @entity(immutable: true) {
+  id: Bytes!
+  user: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
