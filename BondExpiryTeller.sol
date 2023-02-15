@@ -1,3 +1,5 @@
+pragma solidity ^0.8.4;
+
 library FullMath {
     /// @notice Calculates floor(a×b÷denominator) with full precision. Throws if result overflows a uint256 or denominator == 0
     /// @param a The multiplicand
@@ -1251,7 +1253,7 @@ abstract contract BondBaseTeller is IBondTeller, Auth, ReentrancyGuard {
     error Teller_InvalidParams();
 
     /* ========== EVENTS ========== */
-    event Bonded(uint256 indexed id, address indexed referrer, uint256 amount, uint256 payout);
+    event Bonded(uint256 indexed id, address indexed referrer, uint256 amount, uint256 payout, uint256 timeStamp);
 
     /* ========== STATE VARIABLES ========== */
 
@@ -1374,7 +1376,7 @@ abstract contract BondBaseTeller is IBondTeller, Auth, ReentrancyGuard {
         // Handle payout to user (either transfer tokens if instant swap or issue bond token)
         uint48 expiry = _handlePayout(recipient_, payout, payoutToken, vesting);
 
-        emit Bonded(id_, referrer_, amount_, payout);
+        emit Bonded(id_, referrer_, amount_, payout, block.timestamp);
 
         return (payout, expiry);
     }
